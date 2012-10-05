@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BubbleSort", "BubbleSort\BubbleSort.vcxproj", "{F02C1A3C-B053-4D4E-92BF-8CC920BFDB3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F02C1A3C-B053-4D4E-92BF-8CC920BFDB3D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F02C1A3C-B053-4D4E-92BF-8CC920BFDB3D}.Debug|Win32.Build.0 = Debug|Win32
+		{F02C1A3C-B053-4D4E-92BF-8CC920BFDB3D}.Release|Win32.ActiveCfg = Release|Win32
+		{F02C1A3C-B053-4D4E-92BF-8CC920BFDB3D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
