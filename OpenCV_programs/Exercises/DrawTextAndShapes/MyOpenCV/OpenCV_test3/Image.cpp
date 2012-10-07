@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 	rectangle(src_img, Point(100, 100), Point(200, 200), CV_RGB(255, 0, 0), 3);
 	line(src_img, Point(100, 200), Point(400, 400), CV_RGB(0, 255, 0), 3);
 	circle(src_img, Point(100, 200), 60, CV_RGB(0, 0, 255), 3);
-	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(150, 12, 255), 4, 8, false);
+	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(0, 0, 255), 4, 8, false);
 
 	namedWindow("Output image", CV_WINDOW_AUTOSIZE);
 	imshow("Output image", src_img);
