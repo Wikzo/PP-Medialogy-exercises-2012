@@ -57,6 +57,8 @@ int main(int argc, char** argv)
 	//namedWindow("Output image", CV_WINDOW_AUTOSIZE);
 	//imshow("Output image", src_img);
 
+	//hey comment
+
 	waitKey(0);
 
 	return 0;
