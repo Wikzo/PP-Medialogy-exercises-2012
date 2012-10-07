@@ -50,6 +50,8 @@ int main(int argc, char** argv)
 	//imshow("Original image", src_img);
 
 	rectangle(src_img, Point(100, 100), Point(800, 600), CV_RGB(255, 0, 0), 3);
+	rectangle(src_img, Point(15, 50), Point(400, 700), CV_RGB(55, 255, 0), 3);
+
 	line(src_img, Point(100, 200), Point(400, 400), CV_RGB(0, 255, 255), 3);
 	circle(src_img, Point(100, 200), 60, CV_RGB(0, 30, 255), 3);
 	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(0, 0, 255), 4, 8, false);
