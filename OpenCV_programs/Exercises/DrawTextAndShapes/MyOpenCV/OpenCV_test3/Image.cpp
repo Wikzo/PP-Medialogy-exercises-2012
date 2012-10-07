@@ -49,10 +49,10 @@ int main(int argc, char** argv)
 	//namedWindow("Original image", CV_WINDOW_AUTOSIZE);
 	//imshow("Original image", src_img);
 
-	rectangle(src_img, Point(100, 100), Point(300, 200), CV_RGB(255, 200, 0), 3);
-	line(src_img, Point(100, 200), Point(400, 400), CV_RGB(0, 255, 0), 3);
-	circle(src_img, Point(100, 200), 60, CV_RGB(0, 0, 255), 3);
-	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(150, 12, 255), 4, 8, false);
+	rectangle(src_img, Point(100, 100), Point(800, 600), CV_RGB(255, 0, 0), 3);
+	line(src_img, Point(100, 200), Point(400, 400), CV_RGB(0, 255, 255), 3);
+	circle(src_img, Point(100, 200), 60, CV_RGB(0, 30, 255), 3);
+	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(0, 0, 255), 4, 8, false);
 
 	namedWindow("Output image", CV_WINDOW_AUTOSIZE);
 	imshow("Output image", src_img);
