@@ -54,6 +54,7 @@ int main(int argc, char** argv)
 
 	line(src_img, Point(100, 200), Point(400, 400), CV_RGB(0, 255, 255), 3);
 	circle(src_img, Point(100, 200), 60, CV_RGB(0, 30, 255), 3);
+	circle(src_img, Point(0, 200), 60, CV_RGB(255, 30, 0), 3);
 	putText(src_img, "Chrome is a browser :D", Point(10, 30), FONT_HERSHEY_PLAIN, 2, Scalar(0, 0, 255), 4, 8, false);
 
 	namedWindow("Output image", CV_WINDOW_AUTOSIZE);
