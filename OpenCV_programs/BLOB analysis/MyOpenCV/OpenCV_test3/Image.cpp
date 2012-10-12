@@ -4,7 +4,9 @@
 using namespace cv;
 using namespace std;
 
-void StartRecursion(Mat input, Mat output, int tryNum, int objectNum, int y, int x);
+Mat ThresholdBlackWhiteImage(Mat blackWhiteImage, int threshold);
+bool NextPixelAvailableAndNotBurned(Mat input, bool burned[][], int yDir, int xDir, int corY, int corX);
+void GrassFire(Mat input, Mat &output, bool burned[][]);
 
 int main()
 {
@@ -14,6 +16,7 @@ int main()
         cout << "Cannot load image!" << endl;
         return -1;
     }
+	original = ThresholdBlackWhiteImage(original, 180);
 	Mat clone = original.clone();
 
 	for (int y = 0; y < clone.rows; y++)
@@ -24,59 +27,71 @@ int main()
 		}
 	}
 
-	StartRecursion(original, clone, 1, 1, 1, 1);
+	bool** pixelBurns = new bool*[clone.rows];
+	for (int j = 0; j < clone.rows; j++)
+		pixelBurns[j] = new bool[clone.cols];
+
+	GrassFire(original, clone, pixelBurns);
+
 	imshow("Clone", clone);
 	imshow("Original", original);
     waitKey(0);
 }
 
-void StartRecursion(Mat input, Mat output, int tryNum, int objectNum, int y, int x)
+void GrassFire(Mat input, Mat &output, bool burned[][], int direction)
 {
-	// something
+	// Loop through all pixels
+	for (int y = 0; y < input.rows; y++)
+	{
+		for (int x = 0; x < input.cols; x++)
+		{
+			if (NextPixelAvailableAndNotBurned(input, burned, y, x, 0, 0) == true)
+				burned[y][x] = true; // burn current
+		}
+	}
+}
 
-	// if try == left & left pixel == not burned
-	// else if try == down && down pixel == not burned
-	// else if try == right && left == not burned
-	// else if try == up && up == not burned
-	// else -> reached end, found the object, obj++
-
-	if (tryNum == 0)
+void BurnLeft(Mat input, bool burned[][], int y, int x, int direction)
+{
+	// Go left
+	if (NextPixelAvailableAndNotBurned(input, burned, y, x, 0, direction) == true)
 	{
 		// burn this
-		cout << "done" << endl;
-		// return
-		return;
+		burned[y][x+1] == true;
+
+		// call next left
+		BurnLeft(input, burned, y, x);
 	}
 	else
+		return;
+}
+
+bool NextPixelAvailableAndNotBurned(Mat input, bool burned[][], int yDir, int xDir, int corY, int corX)
+{
+	if (input.at<uchar>(corY + yDir, corX + xDir) == 255)
 	{
-		if (input.at<uchar>(y, x+1) == 1) // Go left 1
+		if (burned[corY + yDir][corX + xDir] == false)
+			return true;
+		else
+			return false;
+	}
+}
+
+Mat ThresholdBlackWhiteImage(Mat blackWhiteImage, int threshold)
+{
+	Mat image = blackWhiteImage.clone();
+
+	// Loop through all pixels and set them to either 255 (white) or 0 (black) using the threhold value
+	for (int y = 0; y < image.rows; y++)
+	{
+		for (int x = 0; x < image.cols; x++)
 		{
-			StartRecursion(input, output, 1, objectNum, y, x+1);
-			// Burn this
-			output.at<uchar>(y, x) = 255;
-		}
-		else if (input.at<uchar>(y+1, x) == 1) // Go down 2
-		{
-			StartRecursion(input, output, 2, objectNum, y+1, x);
-			// Burn this
-			output.at<uchar>(y, x) = 255;
-		}
-		else if (input.at<uchar>(y, x-1) == 1) // Go Left 3
-		{
-			StartRecursion(input, output, 3, objectNum, y, x-1);
-			// Burn this
-			output.at<uchar>(y, x) = 255;
-		}
-		else if (input.at<uchar>(y-1, x) == 1) // Go Up 4
-		{
-			StartRecursion(input, output, 4, objectNum, y-1, x);
-			// Burn this
-			output.at<uchar>(y, x) = 255;
-		}
-		else // Has reached end
-		{
-			objectNum++;
-			StartRecursion(input, output, 0, objectNum, y, x);
+			if (image.at<uchar>(y, x) >= threshold)
+				image.at<uchar>(y, x) = 255;
+			else
+				image.at<uchar>(y, x) = 0;
 		}
 	}
+
+	return image;
 }
