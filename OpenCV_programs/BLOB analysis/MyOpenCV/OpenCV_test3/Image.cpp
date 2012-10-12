@@ -32,6 +32,14 @@ int main()
 
 void StartRecursion(Mat input, Mat output, int tryNum, int objectNum, int y, int x)
 {
+	// something
+
+	// if try == left & left pixel == not burned
+	// else if try == down && down pixel == not burned
+	// else if try == right && left == not burned
+	// else if try == up && up == not burned
+	// else -> reached end, found the object, obj++
+
 	if (tryNum == 0)
 	{
 		// burn this
